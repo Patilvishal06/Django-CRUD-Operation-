@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+from .models import *
 
 def home(request):
-    return HttpResponse("this is home page")
+    orders = Order.objects.all()
+    customers = Customer.objects.all()
+
+    context = {'orders': orders ,'customers' :customers}
+    return render(request,"accounts/dashboard.html",context)
 
 def product(request):
-    return HttpResponse("this is product")
+    products = Product.objects.all()
 
-def contact(request):
-    return HttpResponse("this is contact page")
+    return render(request,"accounts/product.html" ,{'products' : products}  )
+
+def customer(request):
+
+    return render(request,"accounts/customer.html")
