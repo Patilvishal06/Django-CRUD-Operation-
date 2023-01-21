@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -36,10 +37,13 @@ class Product(models.Model):
 class Order(models.Model):
     STATUS = (('Pending','Pending'),
               ('out of Delivery','out of Delivery'),
-              ('out of Delivered','Delivered'))
+              ('Delivered' , 'Delivered'))
 
 
     customer = models.ForeignKey(Customer,null=True , on_delete= models.SET_NULL)
     product = models.ForeignKey(Product,null=True,on_delete = models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200,null=True,choices = STATUS)
+
+    def __str__(self):
+        return self.product.name

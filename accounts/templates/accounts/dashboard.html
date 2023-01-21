@@ -1,6 +1,5 @@
 {% extends 'accounts/main.html' %}
 
-
 {% block content %}
 
 {% include 'accounts/status.html'%}
@@ -10,16 +9,18 @@
         <h5>CUSTOMERS</h5>
         <hr>
         <div class="card card-body">
-            <a class="btn btn-primary btn-sa btn-block" href=""> Create Customer </a>
+            <a class="btn btn-primary btn-sa btn-block" href="{% url 'create_order' %}"> Create Customer </a>
             <table class="table table-sm">
                 <tr>
                     <th>Customer</th>
                     <th>Phone</th>
+                    <th></th>
                 </tr>
                  {% for customers in customers %}
                 <tr>
                     <td> {{customers.name}} </td>
                     <td> {{customers.phone}} </td>
+                    <td> <a href="{% url 'customer' customers.id %}" > view </a> </td>
                 </tr>
                 {% endfor %}
             </table>
@@ -41,17 +42,14 @@
                 </tr>
                 {% for order in orders%}
                     <tr>
-                        <td>{{ order.product }}</td>
+                        <td> {{ order.product }}</td>
                         <td>{{ order.date_created }}</td>
                         <td>{{ order.status }}</td>
-                        <td><a href="#"> Update</a> </td>
-                        <td><a href="#" > Delete</a> </td>
+                        <td><a href="{% url 'update_order' order.id %}"> Update</a> </td>
+                        <td><a href="{% url 'delete_order' order.id %}"> Delete</a> </td>
 <!--                        <td>{{ order.name }}</td>-->
-
                     </tr>
                 {% endfor %}
-
-
             </table>
         </div>
     </div>
